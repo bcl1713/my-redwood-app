@@ -101,15 +101,23 @@ export const handler = async (event, context) => {
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({ username, hashedPassword, salt, userAttributes }) => {
-      return db.user.create({
-        data: {
-          email: username,
-          hashedPassword: hashedPassword,
-          salt: salt,
-          // name: userAttributes.name
-        },
-      })
+    //
+    // This is the default handler that I commented out:
+    //
+    // handler: ({ username, hashedPassword, salt, userAttributes }) => {
+    //   return db.user.create({
+    //     data: {
+    //       email: username,
+    //       hashedPassword: hashedPassword,
+    //       salt: salt,
+    //       name: userAttributes.name
+    //     },
+    //   })
+    // },
+    //
+    // The following handler disables creating new accounts
+    handler: () => {
+      return false
     },
 
     errors: {
